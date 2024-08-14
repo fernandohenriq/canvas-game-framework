@@ -1,15 +1,25 @@
-import { Input, EventManager } from "./utils";
+import { Input } from "./utils";
 
 export class Global {
-  canvas = document.body.appendChild(document.createElement("canvas"));
-  ctx = this.canvas.getContext("2d")!;
-  dt = 0;
-  input = new Input();
-  events = {
-    game: new EventManager(),
-    step: new EventManager(),
-    draw: new EventManager(),
-  };
+  canvas: HTMLCanvasElement;
+  ctx: CanvasRenderingContext2D;
+  input: Input;
+  dt: number;
+
+  constructor() {
+    this.canvas = document.body.appendChild(document.createElement("canvas"));
+    this.ctx = this.canvas.getContext("2d")!;
+    this.input = new Input(this);
+    this.dt = 0;
+
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+
+    window.addEventListener("resize", () => {
+      this.canvas.width = window.innerWidth;
+      this.canvas.height = window.innerHeight;
+    });
+  }
 }
 
 export const global = new Global();

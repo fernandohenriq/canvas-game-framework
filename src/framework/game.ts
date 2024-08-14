@@ -1,30 +1,41 @@
 import { global } from ".";
+import { Events } from "./events/events";
+import { DeltaTime } from "./utils/deltaTime";
 
 export class Game {
-  private lastTime = performance.now();
+  private deltaTime = new DeltaTime();
 
-  constructor() {}
+  constructor() {
+    // Stop the game when the user closes the tab
+    window.addEventListener("beforeunload", () => {
+      // event.preventDefault();
+      this.stop();
+      return true;
+    });
+  }
 
   private gameLoop() {
     // Get the delta time
-    const currentTime = performance.now();
-    const dt = (currentTime - this.lastTime) / 1000;
-    this.lastTime = currentTime;
-    global.dt = dt;
+    this.deltaTime.mainLoop();
+    global.dt = this.deltaTime.value;
 
     // Clear the canvas
     global.ctx.clearRect(0, 0, global.canvas.width, global.canvas.height);
 
     // Fire the step and draw events
-    global.events.step.fire("stepEvent", global);
-    global.events.draw.fire("drawEvent", global);
+    Events.eventsLoop.fireAll(global);
+    global.input.updatePrevStates();
 
     // Reques the next frame
     requestAnimationFrame(this.gameLoop.bind(this));
   }
 
   start() {
+    Events.gameEvents.fireGameBegin(global);
     this.gameLoop();
-    global.events.game.fire("gameStart", null);
+  }
+
+  stop() {
+    Events.gameEvents.fireGameEnd(global);
   }
 }

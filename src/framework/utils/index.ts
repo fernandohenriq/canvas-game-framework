@@ -1,2 +1,2 @@
-export * from './event-manager';
-export * from './input-manager';
+export * from './eventManager';
+export * from './inputManager';
