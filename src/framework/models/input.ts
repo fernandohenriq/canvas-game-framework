@@ -1,16 +1,15 @@
-import { Global } from "../game/global";
+import { Global } from "../game";
 
 export class Input {
-  protected global: Global;
+  protected global = Global;
+
   keys: { [key: string]: { status: boolean; prevStatus: boolean } };
   mouseButtons: { [button: number]: { status: boolean; prevStatus: boolean } };
   mouseX: number = 0;
   mouseY: number = 0;
   mouseWheel: number = 0;
 
-  constructor(global: Global) {
-    this.global = global;
-
+  constructor() {
     this.keys = {};
     this.mouseButtons = {};
     window.addEventListener("keydown", ({ code }) => this.setKey(code, true));

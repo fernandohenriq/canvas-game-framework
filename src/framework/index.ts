@@ -1,7 +1,4 @@
-// Export all
+export * from "./events";
 export * from "./game";
 export * from "./models";
-
-// Export some
-export { Events } from "./events";
-export { EventManager } from "./utils";
+export * from "./utils";

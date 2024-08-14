@@ -9,7 +9,7 @@ export const EVENT_LOOP = {
   AFTER: "afterEvent",
 };
 
-export type EventsLoopCallBack = (global: Global) => void;
+export type EventsLoopCallBack = () => void;
 
 export class EventsLoop {
   private eventManager = new EventManager();
@@ -30,12 +30,12 @@ export class EventsLoop {
     this.eventManager.on(EVENT_LOOP.AFTER, callback);
   }
 
-  fireAll(global: Global) {
-    this.eventManager.fire(EVENT_LOOP.BEFORE, global);
-    this.eventManager.fire(EVENT_LOOP.GAME, global);
-    this.eventManager.fire(EVENT_LOOP.STEP, global);
-    this.eventManager.fire(EVENT_LOOP.DRAW, global);
-    this.eventManager.fire(EVENT_LOOP.AFTER, global);
+  fireAll() {
+    this.eventManager.fire(EVENT_LOOP.BEFORE, Global);
+    this.eventManager.fire(EVENT_LOOP.GAME, Global);
+    this.eventManager.fire(EVENT_LOOP.STEP, Global);
+    this.eventManager.fire(EVENT_LOOP.DRAW, Global);
+    this.eventManager.fire(EVENT_LOOP.AFTER, Global);
   }
 
   unregisterAll(callback: EventsLoopCallBack) {

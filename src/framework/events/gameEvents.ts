@@ -6,7 +6,7 @@ export const GAME_EVENTS = {
   GAME_END: "gameEnd",
 };
 
-export type GameEventCallBack = (props: Global) => void;
+export type GameEventCallBack = () => void;
 
 export class GameEvents {
   private eventManager = new EventManager();
@@ -19,11 +19,11 @@ export class GameEvents {
     this.eventManager.on(GAME_EVENTS.GAME_END, event);
   }
 
-  fireGameBegin(global: Global) {
-    this.eventManager.fire(GAME_EVENTS.GAME_BEGIN, global);
+  fireGameBegin() {
+    this.eventManager.fire(GAME_EVENTS.GAME_BEGIN, Global);
   }
 
-  fireGameEnd(global: Global) {
-    this.eventManager.fire(GAME_EVENTS.GAME_END, global);
+  fireGameEnd() {
+    this.eventManager.fire(GAME_EVENTS.GAME_END, Global);
   }
 }

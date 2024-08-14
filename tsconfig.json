@@ -21,11 +21,11 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Paths */
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"],
-      "@game/*": ["src/@framework/*"]
-    }
+    "baseUrl": "."
+    // "paths": {
+    //   "@/*": ["src/*"],
+    //   "@framework/*": ["framework/*"]
+    // }
   },
   "include": ["src"],
   "exclude": ["node_modules"]

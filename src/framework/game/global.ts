@@ -1,25 +1,21 @@
 import { Input } from "../models";
 
 export class Global {
-  canvas: HTMLCanvasElement;
-  ctx: CanvasRenderingContext2D;
-  input: Input;
-  dt: number;
-
-  constructor() {
-    this.canvas = document.body.appendChild(document.createElement("canvas"));
-    this.ctx = this.canvas.getContext("2d")!;
-    this.input = new Input(this);
-    this.dt = 0;
-
-    this.canvas.width = window.innerWidth;
-    this.canvas.height = window.innerHeight;
-
-    window.addEventListener("resize", () => {
-      this.canvas.width = window.innerWidth;
-      this.canvas.height = window.innerHeight;
-    });
-  }
+  static canvas: HTMLCanvasElement;
+  static ctx: CanvasRenderingContext2D;
+  static input: Input;
+  static dt: number;
 }
 
-export const global = new Global();
+Global.canvas = document.body.appendChild(document.createElement("canvas"));
+Global.ctx = Global.canvas.getContext("2d")!;
+Global.input = new Input();
+Global.dt = 0;
+
+Global.canvas.width = window.innerWidth;
+Global.canvas.height = window.innerHeight;
+
+window.addEventListener("resize", () => {
+  Global.canvas.width = window.innerWidth;
+  Global.canvas.height = window.innerHeight;
+});

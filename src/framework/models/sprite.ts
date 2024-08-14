@@ -1,4 +1,4 @@
-import { global } from "..";
+import { Global } from "../game";
 
 export class Sprite {
   image: HTMLImageElement;
@@ -41,19 +41,19 @@ export class Sprite {
   draw(x: number, y: number) {
     if (!this.isLoaded) return;
 
-    global.ctx.save();
-    global.ctx.translate(x, y);
-    global.ctx.rotate(this.angle);
-    global.ctx.globalCompositeOperation = "multiply";
-    global.ctx.globalAlpha = this.alpha;
-    global.ctx.fillStyle = this.blendColor;
-    global.ctx.drawImage(
+    Global.ctx.save();
+    Global.ctx.translate(x, y);
+    Global.ctx.rotate(this.angle);
+    Global.ctx.globalCompositeOperation = "multiply";
+    Global.ctx.globalAlpha = this.alpha;
+    Global.ctx.fillStyle = this.blendColor;
+    Global.ctx.drawImage(
       this.image,
       -this.width / 2 + this.xOffset,
       -this.height / 2 + this.yOffset,
       this.width,
       this.height
     );
-    global.ctx.restore();
+    Global.ctx.restore();
   }
 }

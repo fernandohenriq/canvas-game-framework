@@ -1,6 +1,6 @@
-import { global } from "..";
-import { Events } from "../events/events";
-import { DeltaTime } from "../utils/deltaTime";
+import { Global } from "./global";
+import { Events } from "../events";
+import { DeltaTime } from "../utils";
 
 export class Game {
   private deltaTime = new DeltaTime();
@@ -17,25 +17,25 @@ export class Game {
   private gameLoop() {
     // Get the delta time
     this.deltaTime.mainLoop();
-    global.dt = this.deltaTime.value;
+    Global.dt = this.deltaTime.value;
 
     // Clear the canvas
-    global.ctx.clearRect(0, 0, global.canvas.width, global.canvas.height);
+    Global.ctx.clearRect(0, 0, Global.canvas.width, Global.canvas.height);
 
     // Fire the step and draw events
-    Events.eventsLoop.fireAll(global);
-    global.input.updatePrevStates();
+    Events.eventsLoop.fireAll();
+    Global.input.updatePrevStates();
 
     // Reques the next frame
     requestAnimationFrame(this.gameLoop.bind(this));
   }
 
   start() {
-    Events.gameEvents.fireGameBegin(global);
+    Events.gameEvents.fireGameBegin();
     this.gameLoop();
   }
 
   stop() {
-    Events.gameEvents.fireGameEnd(global);
+    Events.gameEvents.fireGameEnd();
   }
 }

@@ -1,5 +1,5 @@
-import { Global, Sprite } from "..";
-import { Events } from "../events/events";
+import { Sprite } from "./sprite";
+import { Events } from "../events";
 
 export abstract class Entity {
   sprite: Sprite = new Sprite();
@@ -14,8 +14,8 @@ export abstract class Entity {
     Events.eventsLoop.draw(this.drawEvent.bind(this));
   }
 
-  abstract stepEvent(props: Global): void;
-  abstract drawEvent(props: Global): void;
+  abstract stepEvent(): void;
+  abstract drawEvent(): void;
 
   destroy() {
     Events.eventsLoop.unregisterAll(this.stepEvent.bind(this));
