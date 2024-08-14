@@ -1,4 +1,4 @@
-import { Input } from "./utils";
+import { Input } from "../models";
 
 export class Global {
   canvas: HTMLCanvasElement;

@@ -1,4 +1,4 @@
-import { Global } from "../global";
+import { Global } from "../game/global";
 
 export class Input {
   protected global: Global;

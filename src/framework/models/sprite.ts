@@ -1,4 +1,4 @@
-import { global } from ".";
+import { global } from "..";
 
 export class Sprite {
   image: HTMLImageElement;

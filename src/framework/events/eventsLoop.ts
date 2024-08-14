@@ -1,4 +1,4 @@
-import { Global } from "../global";
+import { Global } from "../game/global";
 import { EventManager } from "../utils";
 
 export const EVENT_LOOP = {

@@ -1,6 +1,6 @@
-import { global } from ".";
-import { Events } from "./events/events";
-import { DeltaTime } from "./utils/deltaTime";
+import { global } from "..";
+import { Events } from "../events/events";
+import { DeltaTime } from "../utils/deltaTime";
 
 export class Game {
   private deltaTime = new DeltaTime();

@@ -1,5 +1,5 @@
-import { Global, Sprite } from ".";
-import { Events } from "./events/events";
+import { Global, Sprite } from "..";
+import { Events } from "../events/events";
 
 export abstract class Entity {
   sprite: Sprite = new Sprite();
