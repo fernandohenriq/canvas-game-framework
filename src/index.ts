@@ -1,7 +1,6 @@
 import { Game } from "./framework";
 import { Player } from "./player";
 
-const game = new Game();
-game.start();
+Game.start();
 
 new Player();

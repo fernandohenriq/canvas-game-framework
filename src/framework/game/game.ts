@@ -3,18 +3,11 @@ import { Events } from "../events";
 import { DeltaTime } from "../utils";
 
 export class Game {
-  private deltaTime = new DeltaTime();
+  private static deltaTime = new DeltaTime();
 
-  constructor() {
-    // Stop the game when the user closes the tab
-    window.addEventListener("beforeunload", () => {
-      // event.preventDefault();
-      this.stop();
-      return true;
-    });
-  }
+  private constructor() {}
 
-  private gameLoop() {
+  private static gameLoop() {
     // Get the delta time
     this.deltaTime.mainLoop();
     Global.dt = this.deltaTime.value;
@@ -30,12 +23,13 @@ export class Game {
     requestAnimationFrame(this.gameLoop.bind(this));
   }
 
-  start() {
+  static start() {
     Events.gameEvents.fireGameBegin();
     this.gameLoop();
+    window.addEventListener("beforeunload", this.stop);
   }
 
-  stop() {
+  static stop() {
     Events.gameEvents.fireGameEnd();
   }
 }
