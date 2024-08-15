@@ -6,10 +6,17 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "test": "vitest",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/node": "^22.3.0",
+    "jsdom": "^24.1.1",
     "typescript": "^5.2.2",
-    "vite": "^5.3.4"
+    "vite": "^5.3.4",
+    "vitest": "^2.0.5"
+  },
+  "dependencies": {
+    "canvas": "^2.11.2"
   }
 }

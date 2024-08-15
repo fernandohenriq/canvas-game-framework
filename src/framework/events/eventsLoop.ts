@@ -30,6 +30,26 @@ export class EventsLoop {
     this.eventManager.on(EVENT_LOOP.AFTER, callback);
   }
 
+  unregisterBefore(callback: EventsLoopCallBack) {
+    this.eventManager.off(EVENT_LOOP.BEFORE, callback);
+  }
+
+  unregisterGame(callback: EventsLoopCallBack) {
+    this.eventManager.off(EVENT_LOOP.GAME, callback);
+  }
+
+  unregisterStep(callback: EventsLoopCallBack) {
+    this.eventManager.off(EVENT_LOOP.STEP, callback);
+  }
+
+  unregisterDraw(callback: EventsLoopCallBack) {
+    this.eventManager.off(EVENT_LOOP.DRAW, callback);
+  }
+
+  unregisterAfter(callback: EventsLoopCallBack) {
+    this.eventManager.off(EVENT_LOOP.AFTER, callback);
+  }
+
   fireAll() {
     this.eventManager.fire(EVENT_LOOP.BEFORE, Global);
     this.eventManager.fire(EVENT_LOOP.GAME, Global);

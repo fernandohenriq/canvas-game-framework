@@ -1,4 +1,4 @@
-import { Entity, Global, Sprite } from "./framework";
+import { Entity, Global, ShapeDrawer, Sprite } from "./framework";
 
 export class Player extends Entity {
   spd: number = 64;
@@ -27,7 +27,8 @@ export class Player extends Entity {
     return diff;
   }
 
-  stepEvent({ dt, input }: Global): void {
+  stepEvent(): void {
+    const { dt, input } = Global;
     // Move using WASD keys
     const xDir =
       Number(input.isKeyPressing("d")) - Number(input.isKeyPressing("a"));
@@ -72,7 +73,24 @@ export class Player extends Entity {
     }
   }
 
-  drawEvent({}: Global): void {
+  drawEvent(): void {
     this.sprite.draw(this.x, this.y);
+
+    ShapeDrawer.circle(this.x, this.y, 32, {
+      lineWidth: 5,
+      stroke: "whited",
+      alpha: 0.5,
+      fill: "yellow",
+      lineDash: [10, 10],
+      shadow: {
+        color: "blue",
+        blur: 5,
+        offsetX: 5,
+        offsetY: 5,
+      },
+    });
+    ShapeDrawer.text("Hello World", 128, 128, {
+      fill: "red",
+    });
   }
 }
