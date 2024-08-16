@@ -37,4 +37,8 @@ export class Vector2 {
     const dy = this.y - other.y;
     return Math.sqrt(dx * dx + dy * dy);
   }
+
+  clone(): Vector2 {
+    return new Vector2(this.x, this.y);
+  }
 }

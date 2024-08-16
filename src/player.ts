@@ -1,4 +1,14 @@
 import { Entity, Global, ShapeDrawer, Sprite } from "./framework";
+import { LoopUtils } from "./framework/utils/test/loopUtils";
+import { ParticleSystem } from "./framework/utils/test/particleSystem";
+import {
+  ParticleSystem2,
+  SpriteParticle,
+} from "./framework/utils/test/particleSystem2";
+import { Vector2 } from "./framework/utils/test/vector2";
+
+const particleSystem = new ParticleSystem();
+const particleSystem2 = new ParticleSystem2();
 
 export class Player extends Entity {
   spd: number = 64;
@@ -74,6 +84,16 @@ export class Player extends Entity {
   }
 
   drawEvent(): void {
+    ShapeDrawer.text(
+      `FPS: ${Math.round(1 / Global.dt)}`,
+      Global.canvas.width - 128,
+      42,
+      {
+        fill: "#00FF00",
+        fontSize: "32px",
+      }
+    );
+
     this.sprite.draw(this.x, this.y);
 
     ShapeDrawer.circle(this.x, this.y, 32, {
@@ -89,8 +109,50 @@ export class Player extends Entity {
         offsetY: 5,
       },
     });
+
     ShapeDrawer.text("Hello World", 128, 128, {
-      fill: "red",
+      fill: Math.random() > 0.5 ? "red" : "blue",
     });
+
+    // Emit new particles as needed
+    if (Global.input.isMouseButtonPressing(0)) {
+      LoopUtils.repeat(10, () => {
+        particleSystem.emit(this.x, this.y, {
+          color: "red",
+          size: 5,
+          speed: 100,
+          lifetime: 4,
+          direction: new Vector2(
+            Math.random() - 0.5,
+            Math.random() - 0.5
+          ).normalize(),
+        });
+      });
+    }
+
+    particleSystem2.emitSprite(
+      new SpriteParticle({
+        lifetime: 5,
+        position: new Vector2(this.x, this.y),
+        size: 10,
+        velocity: new Vector2(16, 16),
+        acceleration: new Vector2(4, 4),
+        sprite: {
+          image: this.sprite.image,
+          fps: 10,
+          frameHeight: 32,
+          frameWidth: 32,
+          totalFrames: 8,
+        },
+      })
+    );
+
+    // Update particles
+    particleSystem.update(Global.dt);
+    particleSystem2.update(Global.dt);
+
+    // Render particles
+    particleSystem.render(Global.ctx);
+    particleSystem2.render(Global.ctx);
   }
 }
