@@ -1,11 +1,11 @@
 import { Entity, Global, ShapeDrawer, Sprite } from "./framework";
-import { LoopUtils } from "./framework/utils/test/loopUtils";
-import { ParticleSystem } from "./framework/utils/test/particleSystem";
+import { LoopUtils } from "./framework/utils/test/LoopUtils";
+import { ParticleSystem } from "./framework/utils/test/ParticleSystem";
 import {
   ParticleSystem2,
   SpriteParticle,
-} from "./framework/utils/test/particleSystem2";
-import { Vector2 } from "./framework/utils/test/vector2";
+} from "./framework/utils/test/ParticleSystem2";
+import { Vector2 } from "./framework/utils/test/Vector2";
 
 const particleSystem = new ParticleSystem();
 const particleSystem2 = new ParticleSystem2();

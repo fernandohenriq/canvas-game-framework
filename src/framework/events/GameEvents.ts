@@ -1,4 +1,4 @@
-import { Global } from "../game/global";
+import { Global } from "../game/Global";
 import { EventManager } from "../utils";
 
 export const GAME_EVENTS = {

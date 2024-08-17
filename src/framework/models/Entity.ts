@@ -1,4 +1,4 @@
-import { Sprite } from "./sprite";
+import { Sprite } from "./Sprite";
 import { Events } from "../events";
 
 export abstract class Entity {

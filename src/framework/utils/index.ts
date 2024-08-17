@@ -1,3 +1,3 @@
-export * from './deltaTime';
-export * from './eventManager';
-export * from './shapeDrawer';
+export * from "./DeltaTime";
+export * from "./EventManager";
+export * from "./ShapeDrawer";

@@ -1,3 +1,3 @@
-export * from './events';
-export * from './eventsLoop';
-export * from './gameEvents';
+export * from "./Events";
+export * from "./EventsLoop";
+export * from "./GameEvents";

@@ -1,5 +1,5 @@
 import { Global } from "src/framework/game";
-import { Vector2 } from "./vector2";
+import { Vector2 } from "./Vector2";
 
 export abstract class BaseParticle {
   position: Vector2;

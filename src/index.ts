@@ -1,5 +1,5 @@
 import { Game } from "./framework";
-import { Player } from "./player";
+import { Player } from "./Player";
 
 Game.start();
 

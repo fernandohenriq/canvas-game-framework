@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { Global } from "src/framework/game";
-import { EventTime } from "./eventTime";
+import { EventTime } from "./EventTime";
 import { createCanvas } from "canvas";
 
 describe("EventTime", () => {

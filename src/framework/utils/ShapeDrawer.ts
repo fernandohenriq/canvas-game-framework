@@ -1,4 +1,4 @@
-import { Global } from "../game/global";
+import { Global } from "../game/Global";
 
 interface GradientStop {
   offset: number;

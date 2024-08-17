@@ -1,4 +1,4 @@
-import { Global } from "./global";
+import { Global } from "./Global";
 import { Events } from "../events";
 import { DeltaTime } from "../utils";
 
