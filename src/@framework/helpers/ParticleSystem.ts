@@ -1,4 +1,4 @@
-import { Global } from "src/framework/game";
+import { Game } from "../globals/Game";
 import { Vector2 } from "./Vector2";
 
 export abstract class BaseParticle {
@@ -120,7 +120,7 @@ export class CustomParticle extends BaseParticle {
     this.renderFunction = options.renderFunction;
   }
 
-  render(ctx: CanvasRenderingContext2D = Global.ctx): void {
+  render(ctx: CanvasRenderingContext2D = Game.ctx): void {
     this.renderFunction({
       ctx,
       particle: this,
@@ -161,7 +161,7 @@ interface CustomParticleOptions extends ParticleOptions {
   }) => void;
 }
 
-export class ParticleSystem2 {
+export class ParticleSystem {
   private particles: BaseParticle[] = [];
 
   emitSimple(options: SimpleParticleOptions): void {

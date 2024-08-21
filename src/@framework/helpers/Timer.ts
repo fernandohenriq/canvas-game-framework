@@ -1,5 +1,3 @@
-import { Global } from "src/framework/game";
-
 export type TimerOptions = {
   loops?: number;
 };
@@ -15,7 +13,7 @@ export class Timer {
     this.loops = options?.loops ?? 1;
   }
 
-  update(deltaTime: number = Global.dt) {
+  update(deltaTime: number) {
     if (this.paused) return this;
     if (this.isFinished()) {
       if (this.loops > 0) {

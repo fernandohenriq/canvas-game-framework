@@ -1,4 +1,4 @@
-import { Global } from "../game";
+import { Game } from "./globals/Game";
 
 export class Sprite {
   image: HTMLImageElement;
@@ -13,7 +13,14 @@ export class Sprite {
 
   private isLoaded = false;
 
-  constructor(props?: Partial<PropsOf<Sprite>>) {
+  constructor(
+    spriteOrProps?: string | Partial<PropsOf<Sprite>>,
+    props: Partial<PropsOf<Sprite>> = {}
+  ) {
+    props =
+      typeof spriteOrProps === "string"
+        ? { src: spriteOrProps, ...props }
+        : { ...spriteOrProps, ...props };
     this.src = props?.src ?? "";
     this.image = props?.image ?? new Image(32, 32);
     this.width = props?.width ?? 32;
@@ -41,19 +48,19 @@ export class Sprite {
   draw(x: number, y: number) {
     if (!this.isLoaded) return;
 
-    Global.ctx.save();
-    Global.ctx.translate(x, y);
-    Global.ctx.rotate(this.angle);
-    Global.ctx.globalCompositeOperation = "multiply";
-    Global.ctx.globalAlpha = this.alpha;
-    Global.ctx.fillStyle = this.blendColor;
-    Global.ctx.drawImage(
+    Game.ctx.save();
+    Game.ctx.translate(x, y);
+    Game.ctx.rotate(this.angle);
+    Game.ctx.globalCompositeOperation = "multiply";
+    Game.ctx.globalAlpha = this.alpha;
+    Game.ctx.fillStyle = this.blendColor;
+    Game.ctx.drawImage(
       this.image,
       -this.width / 2 + this.xOffset,
       -this.height / 2 + this.yOffset,
       this.width,
       this.height
     );
-    Global.ctx.restore();
+    Game.ctx.restore();
   }
 }

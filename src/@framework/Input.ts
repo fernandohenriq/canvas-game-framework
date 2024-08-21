@@ -1,8 +1,6 @@
-import { Global } from "../game";
+import { Game } from "./globals/Game";
 
 export class Input {
-  protected global = Global;
-
   keys: { [key: string]: { status: boolean; prevStatus: boolean } };
   mouseButtons: { [button: number]: { status: boolean; prevStatus: boolean } };
   mouseX: number = 0;
@@ -42,7 +40,7 @@ export class Input {
 
   // Mouse methods
   protected updateMousePosition(e: MouseEvent) {
-    const rect = this.global.canvas.getBoundingClientRect();
+    const rect = Game.canvas.getBoundingClientRect();
     this.mouseX = e.clientX - rect.left;
     this.mouseY = e.clientY - rect.top;
   }
@@ -113,6 +111,11 @@ export class Input {
     const wheel = this.mouseWheel;
     this.mouseWheel = 0; // Reset after reading
     return wheel;
+  }
+
+  getMouseDirection(originX: number, originY: number): number {
+    const { x: mouseX, y: mouseY } = this.getMousePosition();
+    return Math.atan2(mouseY - originY, mouseX - originX);
   }
 
   // Method to update previous states (call this at the end of each frame)

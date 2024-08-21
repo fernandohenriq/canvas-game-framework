@@ -1,4 +1,4 @@
-import { Global } from "../game/Global";
+import { Game } from "../globals/Game";
 
 interface GradientStop {
   offset: number;
@@ -45,23 +45,23 @@ interface TextOptions {
 
 export class ShapeDrawer {
   private static setContextProperties(options: ShapeOptions) {
-    Global.ctx.globalAlpha = options.alpha ?? 1;
-    Global.ctx.lineWidth = options.lineWidth ?? 1;
-    Global.ctx.lineCap = options.lineCap ?? "butt";
-    Global.ctx.lineJoin = options.lineJoin ?? "miter";
-    Global.ctx.miterLimit = options.miterLimit ?? 10;
-    Global.ctx.setLineDash(options.lineDash ?? []);
-    Global.ctx.lineDashOffset = options.lineDashOffset ?? 0;
+    Game.ctx.globalAlpha = options.alpha ?? 1;
+    Game.ctx.lineWidth = options.lineWidth ?? 1;
+    Game.ctx.lineCap = options.lineCap ?? "butt";
+    Game.ctx.lineJoin = options.lineJoin ?? "miter";
+    Game.ctx.miterLimit = options.miterLimit ?? 10;
+    Game.ctx.setLineDash(options.lineDash ?? []);
+    Game.ctx.lineDashOffset = options.lineDashOffset ?? 0;
     if (options.shadow) {
-      Global.ctx.shadowColor = options.shadow.color ?? "rgba(0, 0, 0, 0.5)";
-      Global.ctx.shadowBlur = options.shadow.blur ?? 5;
-      Global.ctx.shadowOffsetX = options.shadow.offsetX ?? 0;
-      Global.ctx.shadowOffsetY = options.shadow.offsetY ?? 0;
+      Game.ctx.shadowColor = options.shadow.color ?? "rgba(0, 0, 0, 0.5)";
+      Game.ctx.shadowBlur = options.shadow.blur ?? 5;
+      Game.ctx.shadowOffsetX = options.shadow.offsetX ?? 0;
+      Game.ctx.shadowOffsetY = options.shadow.offsetY ?? 0;
     } else {
-      Global.ctx.shadowColor = "rgba(0, 0, 0, 0)";
-      Global.ctx.shadowBlur = 0;
-      Global.ctx.shadowOffsetX = 0;
-      Global.ctx.shadowOffsetY = 0;
+      Game.ctx.shadowColor = "rgba(0, 0, 0, 0)";
+      Game.ctx.shadowBlur = 0;
+      Game.ctx.shadowOffsetX = 0;
+      Game.ctx.shadowOffsetY = 0;
     }
   }
 
@@ -72,14 +72,14 @@ export class ShapeDrawer {
     y2: number,
     stops: GradientStop[]
   ): CanvasGradient {
-    const gradient = Global.ctx.createLinearGradient(x1, y1, x2, y2);
+    const gradient = Game.ctx.createLinearGradient(x1, y1, x2, y2);
     stops.forEach((stop) => gradient.addColorStop(stop.offset, stop.color));
     return gradient;
   }
 
   private static fillAndStroke(options: ShapeOptions) {
     if (options.fill) {
-      Global.ctx.fillStyle =
+      Game.ctx.fillStyle =
         typeof options.fill === "string"
           ? options.fill
           : this.createGradient(
@@ -89,10 +89,10 @@ export class ShapeDrawer {
               options.fill.y2,
               options.fill.stops
             );
-      Global.ctx.fill();
+      Game.ctx.fill();
     }
     if (options.stroke) {
-      Global.ctx.strokeStyle =
+      Game.ctx.strokeStyle =
         typeof options.stroke === "string"
           ? options.stroke
           : this.createGradient(
@@ -102,7 +102,7 @@ export class ShapeDrawer {
               options.stroke.y2,
               options.stroke.stops
             );
-      Global.ctx.stroke();
+      Game.ctx.stroke();
     }
   }
 
@@ -112,8 +112,8 @@ export class ShapeDrawer {
     radius: number,
     options: ShapeOptions = {}
   ) {
-    Global.ctx.beginPath();
-    Global.ctx.arc(x, y, radius, 0, Math.PI * 2);
+    Game.ctx.beginPath();
+    Game.ctx.arc(x, y, radius, 0, Math.PI * 2);
     this.setContextProperties(options);
     this.fillAndStroke(options);
   }
@@ -126,14 +126,14 @@ export class ShapeDrawer {
   ) {
     this.setContextProperties(options);
 
-    Global.ctx.font = `${options.fontStyle ?? ""} ${options.fontWeight ?? ""} ${
+    Game.ctx.font = `${options.fontStyle ?? ""} ${options.fontWeight ?? ""} ${
       options.fontSize ?? "12px"
     } ${options.fontFamily ?? "Arial"}`;
-    Global.ctx.textAlign = options.textAlign ?? "start";
-    Global.ctx.textBaseline = options.textBaseline ?? "alphabetic";
+    Game.ctx.textAlign = options.textAlign ?? "start";
+    Game.ctx.textBaseline = options.textBaseline ?? "alphabetic";
 
     if (options.fill) {
-      Global.ctx.fillStyle =
+      Game.ctx.fillStyle =
         typeof options.fill === "string"
           ? options.fill
           : this.createGradient(
@@ -143,11 +143,11 @@ export class ShapeDrawer {
               options.fill.y2,
               options.fill.stops
             );
-      Global.ctx.fillText(text, x, y, options.maxWidth);
+      Game.ctx.fillText(text, x, y, options.maxWidth);
     }
 
     if (options.stroke) {
-      Global.ctx.strokeStyle =
+      Game.ctx.strokeStyle =
         typeof options.stroke === "string"
           ? options.stroke
           : this.createGradient(
@@ -157,7 +157,7 @@ export class ShapeDrawer {
               options.stroke.y2,
               options.stroke.stops
             );
-      Global.ctx.strokeText(text, x, y, options.maxWidth);
+      Game.ctx.strokeText(text, x, y, options.maxWidth);
     }
   }
 
@@ -169,13 +169,13 @@ export class ShapeDrawer {
     radius: number,
     options: ShapeOptions = {}
   ) {
-    Global.ctx.beginPath();
-    Global.ctx.moveTo(x + radius, y);
-    Global.ctx.arcTo(x + width, y, x + width, y + height, radius);
-    Global.ctx.arcTo(x + width, y + height, x, y + height, radius);
-    Global.ctx.arcTo(x, y + height, x, y, radius);
-    Global.ctx.arcTo(x, y, x + width, y, radius);
-    Global.ctx.closePath();
+    Game.ctx.beginPath();
+    Game.ctx.moveTo(x + radius, y);
+    Game.ctx.arcTo(x + width, y, x + width, y + height, radius);
+    Game.ctx.arcTo(x + width, y + height, x, y + height, radius);
+    Game.ctx.arcTo(x, y + height, x, y, radius);
+    Game.ctx.arcTo(x, y, x + width, y, radius);
+    Game.ctx.closePath();
     this.setContextProperties(options);
     this.fillAndStroke(options);
   }
@@ -188,8 +188,8 @@ export class ShapeDrawer {
     rotation: number,
     options: ShapeOptions = {}
   ) {
-    Global.ctx.beginPath();
-    Global.ctx.ellipse(x, y, radiusX, radiusY, rotation, 0, Math.PI * 2);
+    Game.ctx.beginPath();
+    Game.ctx.ellipse(x, y, radiusX, radiusY, rotation, 0, Math.PI * 2);
     this.setContextProperties(options);
     this.fillAndStroke(options);
   }
